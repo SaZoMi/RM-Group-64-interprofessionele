@@ -6,7 +6,7 @@ Tijdens de lesweken hebben we het een en het ander al uitgewerkt over het interp
 
 ---
  
-## Onderwerp 2 – Misinformatie en democratie (interprofessioneel)
+##  Onderwerp Misinformatie en democratie
  
 Met generatieve AI is het makkelijker dan ooit om nep-nieuwsartikelen of deepfakes van politici te maken. Onderzoek toont aan dat dit echt effect heeft op hoe mensen stemmen en hoe gepolariseerd ze worden. Tegelijk is AI ook de meest logische tool om die misinformatie te detecteren. Wij willen uitzoeken hoe dat in de praktijk kan werken.
  
