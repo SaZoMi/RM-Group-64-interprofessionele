@@ -1,0 +1,311 @@
+%==============================================================================
+% Research Methods - Group assignment - proposals
+%==============================================================================
+
+% This loads the article template. For a text written in English, add the
+% "english" option, i.e. \documentclass[english]{hogent-article}
+\documentclass{hogent-article}
+
+% Include bibliography file
+\addbibresource{references.bib}
+
+% Info about the assignment, course and study programme
+
+\studyprogramme{Professionele bachelor toegepaste informatica}
+\course{Research Methods, 2E1}
+\assignmenttype{Groepsopdracht}
+\academicyear{2025-2026}
+\title{AI-bias bij geautomatiseerde aanwerving: naar verantwoord gebruik van AI-screeningplatformen}
+
+\author{Simon Borghart}
+\email{simon.borghart@student.hogent.be}
+
+\author{Emiel De Pelsmaeker}
+\email{emiel.depelsmaeker@student.hogent.be}
+
+\author{Simon Boey}
+\email{simon.boey@student.hogent.be}
+
+\projectrepo{https://github.com/SaZoMi/RM-Group-64-interprofessionele.git}
+
+\specialisation{AI \& Data Engineering}
+
+\keywords{algoritmische aanwerving, AI-bias, discriminatie, bias-audit, geautomatiseerde screening}
+
+\begin{document}
+
+\begin{abstract}
+  Werkgevers zetten in toenemende mate AI-gedreven platformen in om cv's en
+  sollicitaties automatisch te screenen en te rangschikken. In de Verenigde
+  Staten lopen momenteel twee collectieve rechtszaken tegen aanbieders van
+  dergelijke platformen: Mobley v. Workday, waarin een federale rechtbank
+  oordeelde dat het aanwervingsplatform van Workday kan optreden als agent
+  van de werkgever en zo onderworpen is aan de federale
+  leeftijdsdiscriminatiewet, en Kistler et al. v. Eightfold AI Inc., waarin
+  gesteld wordt dat het platform kandidaten scoorde en uitfilterde zonder de
+  wettelijk verplichte kennisgevingen. Beide zaken illustreren een breder
+  probleem dat in peer-reviewed onderzoek is aangetoond: algoritmische
+  aanwervingssystemen kunnen bestaande vooroordelen op basis van leeftijd,
+  ras en geslacht reproduceren of versterken. Dit onderzoeksvoorstel
+  onderzoekt welke combinatie van technische en organisatorische maatregelen
+  het meest geschikt is voor een werkgever die een AI-aanwervingsplatform
+  zoals dat van Workday of Eightfold AI inzet, om discriminatie van
+  sollicitanten te beperken zonder de efficiëntiewinst van geautomatiseerde
+  screening significant te verminderen.
+\end{abstract}
+
+\tableofcontents
+
+\section{Inleiding}%
+\label{sec:inleiding}
+
+In mei 2025 liet een federale rechtbank in Californië een collectieve
+rechtszaak toe tegen softwarebedrijf Workday. Eiser Derek Mobley
+solliciteerde over een periode van zeven jaar meer dan honderd keer via het
+aanwervingsplatform van Workday en werd telkens binnen enkele minuten
+afgewezen. De rechtbank oordeelde dat het platform kan optreden als "agent"
+van de werkgevers die het gebruiken, waardoor Workday zelf aansprakelijk kan
+worden gesteld onder de federale leeftijdsdiscriminatiewet (ADEA). De
+vordering kan mogelijk miljoenen sollicitanten ouder dan veertig jaar
+omvatten~\autocite{JonesWalker2026}. In januari 2026 volgde een vergelijkbare
+zaak tegen Eightfold AI, een aanwervingsplatform dat onder meer door
+Microsoft, PayPal, Morgan Stanley, Starbucks, Chevron en Bayer wordt
+gebruikt. De vordering, aangespannen onder de federale Fair Credit Reporting
+Act (FCRA), stelt dat Eightfold AI data van meer dan een miljard werknemers
+verzamelde, kandidaten scoorde op een schaal van nul tot vijf, en laag
+scorende kandidaten uitfilterde vóór menselijke beoordeling, zonder de
+wettelijk verplichte kennisgevingen~\autocite{JonesWalker2026}. Beide zaken
+worden ook beschreven in een analyse van de University of Miami Law
+Review, die erop wijst dat de uitspraak in de zaak tegen Workday de
+juridische grenzen van AI-gedreven aanwerving mee zal bepalen, en dat de
+zaak tegen Eightfold AI een bijkomende juridische vraag stelt, namelijk of
+AI-aanwervingstools onder de Fair Credit Reporting Act
+vallen~\autocite{Adams2026}.
+
+Deze twee zaken zijn geen alleenstaande incidenten. Fabris et al. (2025)
+brengen in een peer-reviewed, multidisciplinair overzicht in kaart hoe
+technische, juridische en organisatorische factoren samen bijdragen aan bias
+in algoritmische aanwervingssystemen~\autocite{Fabris2025}. Chen (2023)
+bevestigt in een peer-reviewed literatuuronderzoek en bevraging dat
+AI-gedreven recrutering leidt tot discriminatoire aanwervingspraktijken op
+basis van onder meer geslacht, ras en persoonlijkheidskenmerken, en wijst
+erop dat deze bias vaak voortkomt uit beperkte of onevenwichtige
+trainingsdata en uit vooroordelen bij de ontwerpers van de
+algoritmen~\autocite{Chen2023}. Recent empirisch onderzoek, nog niet in een
+tijdschrift gepubliceerd maar wel publiek beschikbaar en methodologisch
+navolgbaar, toont bovendien dat de bias zich op meerdere manieren
+manifesteert: Wen et al. (2025) meten met een eigen benchmark aanzienlijke
+raciale en gender-bias in de manier waarop grote taalmodellen cv's
+beoordelen~\autocite{Wen2025}, terwijl Xu et al. (2025) aantonen dat
+taalmodellen die gebruikt worden om cv's te screenen, systematisch de
+voorkeur geven aan cv's die door datzelfde model werden opgesteld, met een
+zelfvoorkeur van 67 tot 82 procent en een 23 tot 60 procent hogere kans op
+shortlisting~\autocite{Xu2025}.
+
+Dit onderzoeksvoorstel richt zich op HR- en compliance-verantwoordelijken bij
+middelgrote tot grote organisaties die een AI-aanwervingsplatform zoals dat
+van Workday of Eightfold AI inzetten of overwegen in te zetten, en die
+verantwoordelijk zijn voor het beperken van de juridische en
+reputatierisico's rond geautomatiseerde aanwerving. Dit is dus niet
+"HR-professionals" in het algemeen, maar specifiek de teams die de
+leverancierskeuze en het beleid rond geautomatiseerde screening bepalen.
+
+Op basis van dit concrete, benoemde probleem, verankerd in de rechtszaken
+tegen Workday en Eightfold AI, luidt de hoofdonderzoeksvraag van dit
+onderzoeksvoorstel:
+
+\begin{quote}
+  Welke combinatie van technische en organisatorische maatregelen
+  (bias-audits, transparante scoringscriteria en menselijk toezicht op
+  automatische afwijzingen) is het meest geschikt voor een werkgever die een
+  AI-aanwervingsplatform zoals dat van Workday of Eightfold AI inzet, om
+  discriminatie van sollicitanten te beperken zonder de efficiëntiewinst van
+  geautomatiseerde screening significant te verminderen?
+\end{quote}
+
+Deze hoofdvraag is een open vraag, geen ja-neevraag en geen opzoekvraag, en
+wordt beantwoord vanuit de concrete situatie van een werkgever die een
+platform zoals dat van Workday of Eightfold AI inzet. Om deze hoofdvraag te
+beantwoorden, wordt de vraag opgesplitst in deelvragen voor zowel het
+probleemdomein als het oplossingsdomein.
+
+Deelvragen probleemdomein:
+\begin{itemize}
+  \item Welke technische oorzaken liggen aan de basis van bias in
+    AI-gedreven cv-screening en rangschikkingssystemen zoals die van
+    Workday en Eightfold AI?
+  \item Welke juridische risico's lopen werkgevers die dergelijke systemen
+    inzetten, in het licht van regelgeving zoals de ADEA en de FCRA?
+  \item In welke mate zijn sollicitanten zich bewust van de rol van AI in
+    het aanwervingsproces en welke impact heeft dit op hun vertrouwen in de
+    werkgever?
+\end{itemize}
+
+Deelvragen oplossingsdomein:
+\begin{itemize}
+  \item Hoe werkt een bias-audit van een AI-aanwervingssysteem in de
+    praktijk en welke meetmethoden worden hiervoor gebruikt?
+  \item Welke vormen van menselijk toezicht op automatische
+    afwijzingsbeslissingen worden in de literatuur voorgesteld en hoe
+    verhouden deze zich tot de efficiëntiewinst van automatisering?
+  \item Hoe kan een werkgever transparantie over scoringscriteria
+    organiseren zonder de onderliggende modellen volledig openbaar te
+    maken?
+  \item Hoe kan de impact van deze maatregelen op zowel bias-reductie als
+    efficiëntie gemeten en vergeleken worden?
+\end{itemize}
+
+Het doel van dit onderzoek is een afwegingskader op te stellen dat een
+werkgever, primair gericht op een organisatie die een platform zoals dat van
+Workday of Eightfold AI inzet, en bij uitbreiding op vergelijkbare
+werkgevers, helpt om AI-gedreven aanwervingssystemen op een verantwoorde
+manier in te zetten. Het onderzoek is specifiek doordat het zich beperkt tot
+drie met naam benoemde maatregelen binnen één concreet probleem, meetbaar
+doordat bias-reductie, doorlooptijd en het aantal terechte of onterechte
+afwijzingen kwantificeerbaar zijn, haalbaar doordat het steunt op publiek
+beschikbare datasets en gepubliceerde rechtszaakdocumenten zonder interne
+bedrijfsdata te vereisen, relevant doordat het probleem recent is aangetoond
+in peer-reviewed onderzoek en zich voordoet bij publiek gedocumenteerde
+bedrijven, en tijdsgebonden doordat de volledige aanpak binnen twaalf weken
+wordt uitgewerkt.
+
+De rest van dit document is als volgt opgebouwd. Sectie~\ref{sec:literatuurstudie}
+bespreekt de bestaande literatuur over bias in algoritmische aanwerving.
+Sectie~\ref{sec:methodologie} beschrijft de voorgestelde onderzoeksaanpak,
+inclusief het technische luik. Sectie~\ref{sec:resultaten} beschrijft de
+verwachte resultaten. Sectie~\ref{sec:conclusie} sluit af met een discussie
+en conclusie.
+
+\section{Literatuurstudie}%
+\label{sec:literatuurstudie}
+
+Fabris et al. (2025) bieden een multidisciplinair overzicht van bias bij
+algoritmische aanwerving, waarin technische bronnen van bias (bijvoorbeeld
+onevenwichtige trainingsdata), juridische kaders (waaronder
+antidiscriminatiewetgeving in verschillende rechtsgebieden) en
+organisatorische factoren (zoals gebrek aan menselijk toezicht) worden
+samengebracht~\autocite{Fabris2025}. Dit overzicht vormt het theoretische
+kader waarbinnen de rechtszaken tegen Workday en Eightfold AI kunnen worden
+begrepen: het toont aan dat de problemen in deze zaken geen alleenstaande
+incidenten zijn, maar een structureel patroon volgen dat in de literatuur al
+uitgebreid is gedocumenteerd.
+
+Chen (2023) onderzoekt via literatuuronderzoek en bevraging hoe AI-gedreven
+recrutering leidt tot discriminatoire aanwervingspraktijken, en wijst op
+twee hoofdoorzaken: beperkte of onevenwichtige trainingsdatasets en
+vooroordelen bij de ontwerpers van de algoritmen. Het onderzoek beveelt zowel
+technische maatregelen aan, zoals onbevooroordeelde datasetkaders en
+verbeterde algoritmische transparantie, als beheersmaatregelen, zoals interne
+ethische governance en extern toezicht~\autocite{Chen2023}. Deze aanbevelingen
+vormen een directe basis voor de drie maatregelen die in dit
+onderzoeksvoorstel centraal staan: bias-audits, transparante
+scoringscriteria en menselijk toezicht.
+
+Recent empirisch onderzoek maakt de aard van deze bias concreter meetbaar.
+Wen et al. (2025) ontwikkelen de FAIRE-benchmark om raciale en gender-bias
+te meten in de manier waarop grote taalmodellen cv's beoordelen over
+verschillende sectoren heen, met behulp van zowel directe scoring als
+rangschikking. Zij stellen vast dat elk onderzocht model een zekere mate van
+bias vertoont, al verschillen omvang en richting sterk tussen
+modellen~\autocite{Wen2025}. Xu et al. (2025) onderzoeken een ander type
+bias: zelfvoorkeur. Via een grootschalig gecontroleerd experiment met
+cv-vergelijkingen stellen zij vast dat taalmodellen consistent de voorkeur
+geven aan cv's die door datzelfde model werden geschreven of aangepast, ook
+wanneer de inhoudelijke kwaliteit gelijk gehouden wordt. Gesimuleerde
+aanwervingspijplijnen over vierentwintig beroepen tonen aan dat kandidaten
+die hetzelfde taalmodel gebruiken als de beoordelaar, 23 tot 60 procent meer
+kans hebben om geselecteerd te worden dan even gekwalificeerde kandidaten met
+een door een mens geschreven cv. Zij tonen ook aan dat deze bias met meer
+dan de helft kan worden teruggedrongen via eenvoudige interventies die
+inspelen op het zelfherkenningsvermogen van het model~\autocite{Xu2025}.
+
+De juridische analyse van Jones Walker LLP (2026) plaatst deze technische
+bevindingen in een concrete, actuele bedrijfscontext. De zaak Mobley
+v. Workday toont aan dat een aanwervingsplatform juridisch kan worden
+beschouwd als agent van de werkgever, met aansprakelijkheid onder de ADEA
+tot gevolg. De zaak Kistler et al. v. Eightfold AI Inc. toont aan dat het
+ontbreken van wettelijk verplichte kennisgevingen bij geautomatiseerde
+scoring tot aansprakelijkheid onder de FCRA kan leiden, en dat dit risico
+zich voordoet bij platformen die door grote, bekende werkgevers worden
+ingezet~\autocite{JonesWalker2026}. Samen bevestigen deze bronnen zowel het
+technische probleem (bias in de onderliggende modellen), het juridische
+risico (aansprakelijkheid onder bestaande regelgeving), als de
+organisatorische oplossingsrichting (audits, transparantie, toezicht) die in
+dit onderzoeksvoorstel worden samengebracht.
+
+\section{Methodologie}%
+\label{sec:methodologie}
+
+Het onderzoek wordt uitgevoerd in vier fasen, elk twee tot vier weken,
+samen passend binnen de beschikbare twaalf weken van dit onderzoekstraject.
+
+\textbf{Fase 1, probleemdomein (weken 1 tot 3).} Via literatuuronderzoek en
+analyse van de publiek beschikbare rechtszaakdocumenten van Mobley
+v. Workday en Kistler et al. v. Eightfold AI Inc. wordt uitgezocht welke
+technische en juridische oorzaken aan de basis liggen van bias bij
+AI-gedreven cv-screening. Deze fase levert een probleembeschrijving op die
+zowel de technische oorzaken van bias als het juridische risicokader
+(ADEA, FCRA) in kaart brengt.
+
+\textbf{Fase 2, oplossingsdomein vanuit de literatuur (weken 4 tot 6).} De
+drie voorgestelde maatregelen, bias-audits, transparante scoringscriteria
+en menselijk toezicht op automatische afwijzingen, worden beschreven en
+onderling vergeleken op basis van de bestaande literatuur, met bijzondere
+aandacht voor de methoden die Wen et al. (2025) en Xu et al. (2025)
+gebruiken om bias te meten. Deze fase levert een literatuurgebaseerd
+afwegingskader op.
+
+\textbf{Fase 3, technisch en praktisch luik (weken 7 tot 10).} Er wordt een
+eenvoudig bias-auditscript geïmplementeerd en toegepast op een publiek
+beschikbare cv- of aanwervingsdataset. Het script meet, naar analogie met de
+methode van Wen et al. (2025), het verschil in scoring of shortlisting-kans
+tussen kandidaten met vergelijkbare kwalificaties maar verschillende
+gesuggereerde demografische kenmerken. Deze fase levert gemeten
+PoC-resultaten op die aantonen in welke mate bias meetbaar en detecteerbaar
+is met eenvoudige, voor een werkgever haalbare middelen. Dit vult het
+cesuur-criterium in dat een technische component vereist naast een louter
+theoretisch of academisch werk.
+
+\textbf{Fase 4, synthese (weken 11 en 12).} De bevindingen uit de
+literatuur en de PoC worden samengebracht tot een afwegingskader voor
+werkgevers die een AI-aanwervingsplatform zoals dat van Workday of
+Eightfold AI inzetten. Deze fase levert het volledige eindrapport op.
+
+Elke fase levert een concreet milestone op: een probleembeschrijving met
+juridisch risicokader na fase 1, een literatuurgebaseerd afwegingskader na
+fase 2, gemeten PoC-resultaten na fase 3, en het volledige eindrapport na
+fase 4. Deze opeenvolging van vier fasen van telkens twee tot vier weken
+past binnen de beschikbare twaalf weken van dit onderzoekstraject.
+
+\section{Verwachte resultaten}%
+\label{sec:resultaten}
+
+Dit onderzoek verwacht een afwegingskader op te leveren waarmee een
+werkgever, primair gericht op een organisatie die een platform zoals dat van
+Workday of Eightfold AI inzet, en bij uitbreiding vergelijkbare werkgevers,
+kan inschatten welke combinatie van bias-audits, transparante
+scoringscriteria en menselijk toezicht het meest geschikt is om
+discriminatie te beperken zonder de efficiëntiewinst van geautomatiseerde
+screening significant te verminderen. De PoC-resultaten uit fase 3 zullen
+concreet aantonen in welke mate bias in een AI-gedreven screeningsysteem
+detecteerbaar is met een eenvoudig, voor een werkgever haalbaar auditscript,
+en welke orde van grootte van bias daarbij gemeten wordt in vergelijking met
+de bevindingen van Wen et al. (2025) en Xu et al. (2025).
+
+\section{Discussie en conclusie}%
+\label{sec:conclusie}
+
+De rechtszaken Mobley v. Workday en Kistler et al. v. Eightfold AI Inc.
+tonen aan dat bias in AI-gedreven aanwervingssystemen geen theoretisch
+probleem is, maar reële juridische en maatschappelijke gevolgen heeft voor
+zowel sollicitanten als werkgevers. Dit onderzoeksvoorstel biedt een aanpak
+om, vertrekkend vanuit dit concrete probleem, een afwegingskader te
+ontwikkelen voor een werkgever zoals een organisatie die een platform zoals
+dat van Workday of Eightfold AI inzet. Door literatuuronderzoek te
+combineren met een technisch-praktisch luik, levert het onderzoek zowel
+theoretisch onderbouwde inzichten als een concrete, meetbare bijdrage over
+de detecteerbaarheid van bias in AI-gedreven aanwervingssystemen.
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
