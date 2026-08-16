@@ -1,0 +1,339 @@
+%==============================================================================
+% Research Methods - Group assignment - pitch
+
+%==============================================================================
+
+\documentclass[aspectratio=169]{beamer}
+
+%==============================================================================
+% Preamble
+%==============================================================================
+
+%---------- Layout ------------------------------------------------------------
+
+\usetheme{hogent}
+\usecolortheme{hgwhite}
+
+%---------- Packages ----------------------------------------------------------
+
+\usepackage[dutch]{babel}
+
+\usepackage{booktabs}
+\usepackage{multirow,multicol}
+\usepackage{eurosym}
+
+%---------- Metadata ----------------------------------------------------------
+
+\title{Pitch onderzoeksvoorstel.}
+\subtitle{Interprofessioneel onderwerp -- Research Methods, 25-26, groep 64}
+\author{Simon Borghart \and Emiel De Pelsmaeker \and Simon Boey}
+\date{\today}
+
+%==============================================================================
+% Presentation content
+%==============================================================================
+
+\begin{document}
+
+{
+    \setbeamertemplate{background}[imgletter]
+        {blurred-background-cellphone-coffee-842554.jpg}{A}
+
+    \begin{frame}
+        \maketitle
+    \end{frame}
+}
+
+\begin{frame}
+    \frametitle{Inhoud.}
+
+    \tableofcontents
+\end{frame}
+
+%==============================================================================
+% Deel 1: Probleem
+%==============================================================================
+
+\section{Probleem.}
+
+\subsection{Context.}
+
+{
+
+\begin{frame}
+
+    {\huge \textbf{Meer dan honderd sollicitaties op zeven jaar tijd.
+    Telkens afgewezen binnen enkele minuten.}}
+
+    \bigskip
+
+    \textbf{Derek Mobley, eiser in Mobley v. Workday}
+
+\end{frame}
+}
+
+\begin{frame}
+    \frametitle{De trend: AI bij aanwerving.}
+
+    \begin{itemize}
+        \item Bedrijven zetten in toenemende mate AI-gedreven platformen
+            in om cv's en sollicitaties automatisch te screenen en te
+            rangschikken.
+        \item Deze systemen verbeteren de efficiëntie van het
+            aanwervingsproces.
+        \item Maar ze kunnen tegelijk bestaande vooroordelen op basis van
+            leeftijd, ras of geslacht reproduceren of versterken.
+        \item Sinds mei 2025 en januari 2026 lopen hierover twee
+            collectieve rechtszaken in de Verenigde Staten, tegen Workday
+            en tegen Eightfold AI.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Concreet voorbeeld: twee rechtszaken.}
+
+    \small
+    \begin{table}
+        \begin{tabular}{lp{4.2cm}p{4.2cm}}
+        \toprule
+                        & \textbf{Mobley v.\ Workday} & \textbf{Kistler v.\ Eightfold AI} \\
+        \midrule
+        Wet             & ADEA (leeftijdsdiscriminatie) & FCRA (kredietrapportagewet) \\
+        Kern            & Platform als ``agent'' van werkgever & Scoring 0--5 en filtering
+                          zonder verplichte kennisgeving \\
+        Schaal          & Mogelijk miljoenen 40+ sollicitanten & Data van 1+ miljard werknemers \\
+        \bottomrule
+        \end{tabular}
+    \end{table}
+
+    \medskip
+    \begin{minipage}{.75\textwidth}
+    Eightfold AI wordt onder meer gebruikt door Microsoft, PayPal, Morgan
+    Stanley, Starbucks, Chevron en Bayer.
+    \end{minipage}
+\end{frame}
+
+\subsection{Onderzoek bevestigt het probleem.}
+
+\begin{frame}
+    \frametitle{Wat toont onderzoek aan?}
+
+    \small
+    \begin{itemize}
+        \item Fabris et al.\ (2025, ACM TIST) brengen in een
+            multidisciplinair overzicht de technische, juridische en
+            organisatorische oorzaken van bias bij algoritmische
+            aanwerving in kaart.
+        \item Chen (2023) bevestigt via literatuuronderzoek en bevraging
+            dat AI-gedreven recrutering leidt tot discriminatoire
+            praktijken op basis van onder meer geslacht en ras.
+        \item Wen et al.\ (2025) meten met een eigen benchmark
+            (\emph{FAIRE}) aanzienlijke raciale en gender-bias in hoe
+            grote taalmodellen cv's beoordelen.
+        \item Xu et al.\ (2025) tonen aan dat taalmodellen tot 60\% vaker
+            cv's shortlisten die door datzelfde model geschreven zijn.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Probleemstelling.}
+
+    Bedrijven zetten in toenemende mate AI-gedreven platformen in om
+    cv's en sollicitaties automatisch te screenen en te rangschikken.
+    Deze systemen verbeteren de efficiëntie van het aanwervingsproces,
+    maar kunnen tegelijk bestaande vooroordelen op basis van leeftijd,
+    ras of geslacht reproduceren of versterken, met reële juridische en
+    maatschappelijke gevolgen zoals blijkt uit de lopende rechtszaken
+    tegen Workday en Eightfold AI. HR- en compliance-verantwoordelijken
+    hebben onvoldoende houvast om bias te herkennen, te meten en te
+    beperken, en om te voldoen aan bestaande regelgeving zoals de ADEA
+    en de FCRA.
+\end{frame}
+
+\subsection{Onderzoeksvraag.}
+
+\begin{frame}
+    \frametitle{Onderzoeksvraag.}
+
+    \begin{quote}
+        \textbf{Welke combinatie van technische en organisatorische
+        maatregelen (bias-audits, transparante scoringscriteria en
+        menselijk toezicht op automatische afwijzingen) is het meest
+        geschikt voor een werkgever die een AI-aanwervingsplatform zoals
+        dat van Workday of Eightfold AI inzet, om discriminatie van
+        sollicitanten te beperken zonder de efficiëntiewinst van
+        geautomatiseerde screening significant te verminderen?}
+    \end{quote}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Doelgroep.}
+
+    \begin{itemize}
+        \item HR- en compliance-verantwoordelijken bij middelgrote tot
+            grote organisaties.
+        \item Specifiek: teams die een AI-aanwervingsplatform zoals dat
+            van Workday of Eightfold AI inzetten of overwegen in te
+            zetten.
+        \item Verantwoordelijk voor het beperken van juridische en
+            reputatierisico's rond geautomatiseerde aanwerving.
+        \item Dus niet ``HR-professionals'' in het algemeen, maar
+            specifiek de teams die de leverancierskeuze en het
+            screeningbeleid bepalen.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Waarom dit onderwerp?}
+
+    \small
+    \begin{itemize}
+        \item \textbf{Specific}: drie met naam benoemde maatregelen
+            (bias-audits, transparante scoringscriteria, menselijk
+            toezicht) binnen \'e\'en concreet probleem.
+        \item \textbf{Measurable}: bias-reductie, doorlooptijd en aantal
+            (on)terechte afwijzingen zijn kwantificeerbaar, uit
+            literatuur \'en uit een eigen PoC-audit.
+        \item \textbf{Achievable}: publiek beschikbare datasets,
+            open-source auditingtools, geen interne bedrijfsdata nodig.
+        \item \textbf{Realistic/Relevant}: recent aangetoond in
+            peer-reviewed onderzoek, verankerd bij publiek
+            gedocumenteerde bedrijven (Workday, Eightfold AI).
+        \item \textbf{Time-bound}: volledige aanpak uitgewerkt binnen
+            twaalf weken.
+    \end{itemize}
+\end{frame}
+
+%==============================================================================
+% Deel 2: Aanpak
+%==============================================================================
+
+\section{Aanpak.}
+
+\subsection{Deelvragen.}
+
+\begin{frame}
+    \frametitle{Deelvragen: probleemdomein.}
+
+    \begin{itemize}
+        \item Welke technische oorzaken liggen aan de basis van bias in
+            AI-gedreven cv-screening en rangschikkingssystemen zoals die
+            van Workday en Eightfold AI?
+        \item Welke juridische risico's lopen werkgevers die dergelijke
+            systemen inzetten, in het licht van regelgeving zoals de
+            ADEA en de FCRA?
+        \item In welke mate zijn sollicitanten zich bewust van de rol
+            van AI in het aanwervingsproces, en welke impact heeft dit
+            op hun vertrouwen in de werkgever?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Deelvragen: oplossingsdomein.}
+
+    \begin{itemize}
+        \item Hoe werkt een bias-audit van een AI-aanwervingssysteem in
+            de praktijk, en welke meetmethoden worden hiervoor gebruikt?
+        \item Welke vormen van menselijk toezicht op automatische
+            afwijzingsbeslissingen worden in de literatuur voorgesteld?
+        \item Hoe kan een werkgever transparantie over scoringscriteria
+            organiseren zonder de onderliggende modellen volledig
+            openbaar te maken?
+        \item Hoe kan de impact van deze maatregelen op zowel
+            bias-reductie als efficiëntie gemeten en vergeleken worden?
+    \end{itemize}
+\end{frame}
+
+\subsection{Methodologie.}
+
+\begin{frame}
+    \frametitle{Vier fasen, twaalf weken.}
+
+    \small
+    \begin{table}
+        \begin{tabular}{@{}lcp{5.8cm}@{}}
+        \toprule
+        \textbf{Fase} & \textbf{Weken} & \textbf{Milestone} \\
+        \midrule
+        1. Probleemdomein  & 1--3   & Probleembeschrijving + juridisch risicokader \\
+        2. Literatuur       & 4--6   & Literatuurgebaseerd afwegingskader \\
+        3. Technisch luik   & 7--10  & PoC bias-auditscript op cv-dataset \\
+        4. Synthese         & 11--12 & Eindrapport \\
+        \bottomrule
+        \end{tabular}
+    \end{table}
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+        \item \textbf{Wat}: een eenvoudig bias-auditscript implementeren
+            en toepassen op een publiek beschikbare cv- of
+            aanwervingsdataset.
+        \item \textbf{Meting}: het verschil in scoring of
+            shortlisting-kans tussen kandidaten met vergelijkbare
+            kwalificaties maar verschillende gesuggereerde
+            demografische kenmerken.
+        \item \textbf{Aanpak}: naar analogie met de meetmethode van
+            Wen et al.\ (2025).
+        \item \textbf{Waarom dit telt}: vult het cesuurcriterium
+            ``technische component'' in, naast het theoretische werk.
+    \end{itemize}
+\end{frame}
+
+\subsection{Resultaat.}
+
+\begin{frame}
+    \frametitle{Verwacht resultaat.}
+
+    \begin{itemize}
+        \item Een afwegingskader waarmee een werkgever zoals een
+            gebruiker van Workday of Eightfold AI bias kan beperken
+            zonder de efficiëntie van geautomatiseerde screening te
+            verliezen.
+        \item Gemeten PoC-resultaten die aantonen hoe detecteerbaar bias
+            is met een eenvoudig, haalbaar auditscript.
+        \item Geen interne bedrijfsdata nodig: publieke datasets en
+            gepubliceerde rechtszaakdocumenten volstaan.
+    \end{itemize}
+\end{frame}
+
+%==============================================================================
+% Tot slot
+%==============================================================================
+
+\section{Tot slot.}
+
+\begin{frame}
+    \frametitle{Bronnen.}
+
+    \small
+    \begin{itemize}
+        \item \textbf{Fabris et al.\ (2025)}, ACM TIST -- peer-reviewed
+            tijdschriftartikel, multidisciplinair overzicht.
+        \item \textbf{Chen (2023)}, Humanities and Social Sciences
+            Communications -- peer-reviewed tijdschriftartikel
+            (Springer/Nature).
+        \item \textbf{Wen et al.\ (2025)}, \textbf{Xu et al.\ (2025)} --
+            arXiv-preprints, meting van bias bij cv-screening.
+        \item \textbf{Jones Walker LLP (2026)}, \textbf{University of
+            Miami Law Review (2026)} -- onafhankelijke juridische
+            analyses van beide rechtszaken.
+        \item \textbf{EU AI Act (2024)}, \textbf{EEOC (2024)} --
+            regelgevend kader, EU en VS.
+    \end{itemize}
+
+    \medskip
+    \begin{minipage}{.7\textwidth}
+    Bewust een mix van brontypes: peer-reviewed publicaties,
+    arXiv-preprints \'en onafhankelijke juridische analyses.
+    \end{minipage}
+\end{frame}
+
+\begin{frame}
+    {\Huge \textbf{Vragen?}}
+
+    \bigskip
+    Bedankt voor jullie aandacht.
+\end{frame}
+
+\end{document}
