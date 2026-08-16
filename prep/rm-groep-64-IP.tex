@@ -15,7 +15,7 @@
 \course{Research Methods, 2E1}
 \assignmenttype{Groepsopdracht}
 \academicyear{2025-2026}
-\title{AI-bias bij geautomatiseerde aanwerving: naar verantwoord gebruik van AI-screeningplatformen}
+\title{AI-bias bij geautomatiseerde aanwerving: het geval van Workday en Eightfold AI}
 
 \author{Simon Borghart}
 \email{simon.borghart@student.hogent.be}
@@ -48,10 +48,9 @@
   aanwervingssystemen kunnen bestaande vooroordelen op basis van leeftijd,
   ras en geslacht reproduceren of versterken. Dit onderzoeksvoorstel
   onderzoekt welke combinatie van technische en organisatorische maatregelen
-  het meest geschikt is voor een werkgever die een AI-aanwervingsplatform
-  zoals dat van Workday of Eightfold AI inzet, om discriminatie van
-  sollicitanten te beperken zonder de efficiëntiewinst van geautomatiseerde
-  screening significant te verminderen.
+  het meest geschikt is om discriminatie van sollicitanten door
+  AI-gedreven aanwervingsplatformen te beperken, zonder de efficiëntiewinst
+  van geautomatiseerde screening significant te verminderen.
 \end{abstract}
 
 \tableofcontents
@@ -122,15 +121,17 @@ onderzoeksvoorstel:
 \begin{quote}
   Welke combinatie van technische en organisatorische maatregelen
   (bias-audits, transparante scoringscriteria en menselijk toezicht op
-  automatische afwijzingen) is het meest geschikt voor een werkgever die een
-  AI-aanwervingsplatform zoals dat van Workday of Eightfold AI inzet, om
-  discriminatie van sollicitanten te beperken zonder de efficiëntiewinst van
-  geautomatiseerde screening significant te verminderen?
+  automatische afwijzingen) is het meest geschikt om discriminatie van
+  sollicitanten door AI-gedreven aanwervingsplatformen te beperken, zonder
+  de efficiëntiewinst van geautomatiseerde screening significant te
+  verminderen?
 \end{quote}
 
 Om deze hoofdvraag te
 beantwoorden, wordt de vraag opgesplitst in deelvragen voor zowel het
-probleemdomein als het oplossingsdomein.
+probleemdomein als het oplossingsdomein, die doorheen dit onderzoek
+geïllustreerd worden aan de hand van de rechtszaken tegen Workday en
+Eightfold AI.
 
 Deelvragen probleemdomein:
 \begin{itemize}
@@ -158,19 +159,18 @@ Deelvragen oplossingsdomein:
     efficiëntie gemeten en vergeleken worden?
 \end{itemize}
 
-Het doel van dit onderzoek is een afwegingskader op te stellen dat een
-werkgever, primair gericht op een organisatie die een platform zoals dat van
-Workday of Eightfold AI inzet, en bij uitbreiding op vergelijkbare
-werkgevers, helpt om AI-gedreven aanwervingssystemen op een verantwoorde
-manier in te zetten. Het onderzoek is specifiek doordat het zich beperkt tot
-drie met naam benoemde maatregelen binnen één concreet probleem, meetbaar
-doordat bias-reductie, doorlooptijd en het aantal terechte of onterechte
-afwijzingen kwantificeerbaar zijn, haalbaar doordat het steunt op publiek
-beschikbare datasets en gepubliceerde rechtszaakdocumenten zonder interne
-bedrijfsdata te vereisen, relevant doordat het probleem recent is aangetoond
-in peer-reviewed onderzoek en zich voordoet bij publiek gedocumenteerde
-bedrijven, en tijdsgebonden doordat de volledige aanpak binnen twaalf weken
-wordt uitgewerkt.
+Het doel van dit onderzoek is een afwegingskader op te stellen dat
+werkgevers die een AI-aanwervingsplatform zoals dat van Workday of
+Eightfold AI inzetten, helpt om AI-gedreven aanwervingssystemen op een
+verantwoorde manier in te zetten. Het onderzoek beperkt zich tot drie met
+naam benoemde maatregelen binnen één concreet probleem. Bias-reductie,
+doorlooptijd en het aantal terechte of onterechte afwijzingen zijn daarbij
+kwantificeerbare grootheden. Het steunt op publiek beschikbare datasets,
+open-source auditingtools en gepubliceerde rechtszaakdocumenten, zonder dat
+hiervoor interne bedrijfsdata nodig is. Het probleem is bovendien recent
+aangetoond in peer-reviewed onderzoek en doet zich in de praktijk voor bij
+publiek gedocumenteerde bedrijven. De volledige aanpak wordt ten slotte
+uitgewerkt binnen de beschikbare twaalf weken van dit onderzoekstraject.
 
 De rest van dit document is als volgt opgebouwd. Sectie~\ref{sec:literatuurstudie}
 bespreekt de bestaande literatuur over bias in algoritmische aanwerving.
@@ -235,23 +235,36 @@ vormen een directe basis voor de drie maatregelen die in dit
 onderzoeksvoorstel centraal staan: bias-audits, transparante
 scoringscriteria en menselijk toezicht.
 
-Recent empirisch onderzoek maakt de aard van deze bias concreter meetbaar.
-Wen et al. (2025) ontwikkelen de FAIRE-benchmark om raciale en gender-bias
-te meten in de manier waarop grote taalmodellen cv's beoordelen over
-verschillende sectoren heen, met behulp van zowel directe scoring als
-rangschikking. Zij stellen vast dat elk onderzocht model een zekere mate van
-bias vertoont, al verschillen omvang en richting sterk tussen
-modellen~\autocite{Wen2025}. Xu et al. (2025) onderzoeken een ander type
-bias: zelfvoorkeur. Via een grootschalig gecontroleerd experiment met
-cv-vergelijkingen stellen zij vast dat taalmodellen consistent de voorkeur
-geven aan cv's die door datzelfde model werden geschreven of aangepast, ook
-wanneer de inhoudelijke kwaliteit gelijk gehouden wordt. Gesimuleerde
-aanwervingspijplijnen over vierentwintig beroepen tonen aan dat kandidaten
-die hetzelfde taalmodel gebruiken als de beoordelaar, 23 tot 60 procent meer
-kans hebben om geselecteerd te worden dan even gekwalificeerde kandidaten met
-een door een mens geschreven cv. Zij tonen ook aan dat deze bias met meer
-dan de helft kan worden teruggedrongen via eenvoudige interventies die
-inspelen op het zelfherkenningsvermogen van het model~\autocite{Xu2025}.
+Recent empirisch onderzoek maakt de aard van deze bias concreter meetbaar,
+en levert daarbij ook reproduceerbare, open-source auditmethoden op. Wen et
+al. (2025) ontwikkelen de FAIRE-benchmark om raciale en gender-bias te meten
+in de manier waarop grote taalmodellen cv's beoordelen over verschillende
+sectoren heen, met behulp van zowel directe scoring als rangschikking. Zij
+stellen vast dat elk onderzocht model een zekere mate van bias vertoont, al
+verschillen omvang en richting sterk tussen modellen~\autocite{Wen2025}. Xu
+et al. (2025) onderzoeken een ander type bias: zelfvoorkeur. Via een
+grootschalig gecontroleerd experiment met cv-vergelijkingen stellen zij vast
+dat taalmodellen consistent de voorkeur geven aan cv's die door datzelfde
+model werden geschreven of aangepast, ook wanneer de inhoudelijke kwaliteit
+gelijk gehouden wordt. Gesimuleerde aanwervingspijplijnen over
+vierentwintig beroepen tonen aan dat kandidaten die hetzelfde taalmodel
+gebruiken als de beoordelaar, 23 tot 60 procent meer kans hebben om
+geselecteerd te worden dan even gekwalificeerde kandidaten met een door een
+mens geschreven cv. Zij tonen ook aan dat deze bias met meer dan de helft
+kan worden teruggedrongen via eenvoudige interventies die inspelen op het
+zelfherkenningsvermogen van het model~\autocite{Xu2025}. Wilson en Caliskan
+(2024) meten op hun beurt raciale, gender- en intersectionele bias bij
+cv-screening via taalmodel-gebaseerde retrieval, op een publiek
+beschikbare dataset van meer dan vijfhonderd cv's en vijfhonderd
+vacatureomschrijvingen over negen sectoren. Door telkens enkel de naam op
+een cv te vervangen door een naam die statistisch geassocieerd wordt met
+een bepaald ras of geslacht, en de resulterende verschuiving in
+rangschikking te meten, tonen zij aan dat de onderzochte modellen in 85,1\%
+van de gevallen namen die met blanke kandidaten geassocieerd worden
+bevoordelen, en dat zwarte mannelijke kandidaten in tot 100\% van de
+gevallen benadeeld worden. De volledige implementatie van deze
+naamvervangingsmethode is publiek beschikbaar als open-source
+code~\autocite{Wilson2024}.
 
 De juridische analyse van Jones Walker LLP (2026) plaatst deze technische
 bevindingen in een concrete, actuele bedrijfscontext. De zaak Mobley
@@ -285,20 +298,63 @@ zowel de technische oorzaken van bias als het juridische risicokader
 drie voorgestelde maatregelen, bias-audits, transparante scoringscriteria
 en menselijk toezicht op automatische afwijzingen, worden beschreven en
 onderling vergeleken op basis van de bestaande literatuur, met bijzondere
-aandacht voor de methoden die Wen et al. (2025) en Xu et al. (2025)
-gebruiken om bias te meten. Deze fase levert een literatuurgebaseerd
-afwegingskader op.
+aandacht voor de methoden die Wen et al. (2025), Xu et al. (2025) en Wilson
+en Caliskan (2024) gebruiken om bias te meten. Deze fase levert een
+literatuurgebaseerd afwegingskader op.
 
-\textbf{Fase 3, technisch en praktisch luik (weken 7 tot 10).} Er wordt een
-eenvoudig bias-auditscript geïmplementeerd en toegepast op een publiek
-beschikbare cv- of aanwervingsdataset. Het script meet, naar analogie met de
-methode van Wen et al. (2025), het verschil in scoring of shortlisting-kans
-tussen kandidaten met vergelijkbare kwalificaties maar verschillende
-gesuggereerde demografische kenmerken. Deze fase levert gemeten
-PoC-resultaten op die aantonen in welke mate bias meetbaar en detecteerbaar
-is met eenvoudige, voor een werkgever haalbare middelen. Dit vult het
-cesuur-criterium in dat een technische component vereist naast een louter
-theoretisch of academisch werk.
+\textbf{Fase 3, technisch en praktisch luik (weken 7 tot 10).} Om het
+onderzoek te onderbouwen met eigen, empirisch bewijs naast de literatuur,
+wordt een proof-of-concept (PoC) uitgewerkt die drie condities test op
+dezelfde, vaste dataset. Als dataset wordt de publiek beschikbare set van
+meer dan vijfhonderd cv's en vijfhonderd vacatureomschrijvingen van Wilson
+en Caliskan (2024) gebruikt, aangevuld met hun open-source implementatie
+voor naamvervanging~\autocite{Wilson2024}. Voor een vaste steekproef van
+cv-vacature-paren wordt telkens enkel de naam op het cv vervangen door een
+naam die statistisch geassocieerd wordt met een specifieke combinatie van
+ras en geslacht (bijvoorbeeld een naam geassocieerd met een blanke man, een
+zwarte vrouw, een Aziatische man, enzovoort), terwijl de rest van het cv
+ongewijzigd blijft.
+
+Dezelfde cv-vacature-paren worden driemaal gerangschikt met een
+tekst-embeddingmodel dat cv's op relevantie ten opzichte van de
+vacatureomschrijving rangschikt, naar het principe van de retrieval-opzet
+van Wilson en Caliskan (2024), telkens onder een andere conditie:
+\begin{itemize}
+  \item \textbf{Conditie 0, baseline:} de cv's worden gerangschikt zonder
+    enige aanvullende maatregel.
+  \item \textbf{Conditie 1, bias-audit met terugkoppeling:} de baseline-
+    rangschikking wordt eerst gemeten, waarna de ranking van elk cv over
+    alle naamvarianten heen vergeleken wordt om systematische
+    rangschikkingsverschillen op te sporen, naar analogie met de aanpak van
+    Wilson en Caliskan (2024) en Wen et al. (2025).
+  \item \textbf{Conditie 2, transparante scoringscriteria:} het
+    embeddingmodel krijgt een expliciete, vooraf gedefinieerde rubriek van
+    functiegerelateerde criteria (bijvoorbeeld jaren ervaring, vereiste
+    vaardigheden, opleidingsniveau) aangereikt waarop het moet scoren, in
+    plaats van een vrije relevantiescore te bepalen.
+  \item \textbf{Conditie 3, menselijk toezicht:} de laagst gerangschikte
+    kandidaten per naamvariant worden voorgelegd aan een tweede,
+    onafhankelijke controle die nagaat of de afwijzing consistent is met de
+    functievereisten, naar analogie met de menselijke toezichtsmaatregel die
+    Chen (2023) aanbeveelt.
+\end{itemize}
+
+Per conditie wordt op dezelfde steekproef gemeten: (1) het percentage
+gevallen waarin een naamvariant geassocieerd met een blanke kandidaat hoger
+gerangschikt wordt dan een gelijkwaardige naamvariant geassocieerd met een
+kandidaat van een andere etniciteit, (2) hetzelfde percentage voor
+gender-geassocieerde naamvarianten, (3) de gemiddelde verschuiving in
+rangschikkingspositie tussen naamvarianten met gelijke cv-inhoud, en (4) de
+doorlooptijd van de rangschikking per conditie, als indicatie van de
+efficiëntiekost van elke maatregel. Zo wordt per maatregel een individuele
+bias-reductie ten opzichte van de baseline bepaald, en wordt nagegaan of de
+bias die Wilson en Caliskan (2024) op hun volledige dataset meten, zich ook
+in deze eigen, gecontroleerde testopstelling laat reproduceren op de
+gekozen steekproef. Deze fase levert gemeten PoC-resultaten op die aantonen
+in welke mate bias meetbaar en detecteerbaar is, en in welke mate elke
+maatregel deze bias kan beperken, met eenvoudige, voor een werkgever
+haalbare middelen. Dit vult het cesuur-criterium in dat een technische
+component vereist naast een louter theoretisch of academisch werk.
 
 \textbf{Fase 4, synthese (weken 11 en 12).} De bevindingen uit de
 literatuur en de PoC worden samengebracht tot een afwegingskader voor
@@ -314,17 +370,18 @@ past binnen de beschikbare twaalf weken van dit onderzoekstraject.
 \section{Verwachte resultaten}%
 \label{sec:resultaten}
 
-Dit onderzoek verwacht een afwegingskader op te leveren waarmee een
-werkgever, primair gericht op een organisatie die een platform zoals dat van
-Workday of Eightfold AI inzet, en bij uitbreiding vergelijkbare werkgevers,
-kan inschatten welke combinatie van bias-audits, transparante
+Dit onderzoek verwacht een afwegingskader op te leveren waarmee werkgevers,
+zoals organisaties die een platform als Workday of Eightfold AI inzetten,
+kunnen inschatten welke combinatie van bias-audits, transparante
 scoringscriteria en menselijk toezicht het meest geschikt is om
 discriminatie te beperken zonder de efficiëntiewinst van geautomatiseerde
-screening significant te verminderen. De PoC-resultaten uit fase 3 zullen
-concreet aantonen in welke mate bias in een AI-gedreven screeningsysteem
-detecteerbaar is met een eenvoudig, voor een werkgever haalbaar auditscript,
-en welke orde van grootte van bias daarbij gemeten wordt in vergelijking met
-de bevindingen van Wen et al. (2025) en Xu et al. (2025).
+screening significant te verminderen. Daarnaast levert de proof-of-concept
+uit fase 3 concrete, zelf gemeten resultaten op over de mate van raciale en
+gender-bias in cv-rangschikking, en de doorlooptijd, onder vier condities
+(baseline, bias-audit met terugkoppeling, transparante scoringscriteria en
+menselijk toezicht), wat toelaat de bevindingen van Wilson en Caliskan
+(2024), Wen et al. (2025) en Xu et al. (2025) te toetsen aan een eigen,
+gecontroleerde testopstelling.
 
 \section{Discussie en conclusie}%
 \label{sec:conclusie}
@@ -334,11 +391,14 @@ tonen aan dat bias in AI-gedreven aanwervingssystemen geen theoretisch
 probleem is, maar reële juridische en maatschappelijke gevolgen heeft voor
 zowel sollicitanten als werkgevers. Dit onderzoeksvoorstel biedt een aanpak
 om, vertrekkend vanuit dit concrete probleem, een afwegingskader te
-ontwikkelen voor een werkgever zoals een organisatie die een platform zoals
-dat van Workday of Eightfold AI inzet. Door literatuuronderzoek te
-combineren met een technisch-praktisch luik, levert het onderzoek zowel
-theoretisch onderbouwde inzichten als een concrete, meetbare bijdrage over
-de detecteerbaarheid van bias in AI-gedreven aanwervingssystemen.
+ontwikkelen voor werkgevers die een AI-aanwervingsplatform zoals dat van
+Workday of Eightfold AI inzetten. De voorgestelde methodologie combineert
+literatuuronderzoek met een eigen proof-of-concept op de dataset en
+naamvervangingsmethode van Wilson en Caliskan (2024), waarbij dezelfde
+cv-vacature-paren onder vier condities worden getest. Zo levert het
+onderzoek zowel theoretisch onderbouwde inzichten als een concrete, meetbare
+bijdrage over de detecteerbaarheid en beperkbaarheid van bias in
+AI-gedreven aanwervingssystemen.
 
 \printbibliography[heading=bibintoc]
 
