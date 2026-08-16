@@ -126,12 +126,15 @@
             aanwerving in kaart.
         \item Chen (2023) bevestigt via literatuuronderzoek en bevraging
             dat AI-gedreven recrutering leidt tot discriminatoire
-            praktijken op basis van onder meer geslacht en ras.
+            praktijken, en beveelt bias-audits, transparantie en
+            menselijk toezicht aan.
         \item Wen et al.\ (2025) meten met een eigen benchmark
             (\emph{FAIRE}) aanzienlijke raciale en gender-bias in hoe
             grote taalmodellen cv's beoordelen.
-        \item Xu et al.\ (2025) tonen aan dat taalmodellen tot 60\% vaker
-            cv's shortlisten die door datzelfde model geschreven zijn.
+        \item Wilson \& Caliskan (2024) tonen op een dataset van 500+
+            cv's aan dat blank-geassocieerde namen in \textbf{85,1\%}
+            van de gevallen bevoordeeld worden, en zwarte mannelijke
+            kandidaten tot \textbf{100\%} benadeeld worden.
     \end{itemize}
 \end{frame}
 
@@ -155,15 +158,16 @@
 \begin{frame}
     \frametitle{Onderzoeksvraag.}
 
-    \begin{quote}
+      \begin{quote}
         \textbf{Welke combinatie van technische en organisatorische
         maatregelen (bias-audits, transparante scoringscriteria en
         menselijk toezicht op automatische afwijzingen) is het meest
-        geschikt voor een werkgever die een AI-aanwervingsplatform zoals
-        dat van Workday of Eightfold AI inzet, om discriminatie van
-        sollicitanten te beperken zonder de efficiëntiewinst van
+        geschikt om discriminatie van sollicitanten door AI-gedreven
+        aanwervingsplatformen te beperken, zonder de efficiëntiewinst van
         geautomatiseerde screening significant te verminderen?}
     \end{quote}
+	   \text Doorheen dit onderzoek werken we aan de hand van
+    de rechtszaken tegen Workday en Eightfold AI.
 \end{frame}
 
 \begin{frame}
@@ -257,7 +261,7 @@
         \midrule
         1. Probleemdomein  & 1--3   & Probleembeschrijving + juridisch risicokader \\
         2. Literatuur       & 4--6   & Literatuurgebaseerd afwegingskader \\
-        3. Technisch luik   & 7--10  & PoC bias-auditscript op cv-dataset \\
+        3. Technisch luik   & 7--10  & PoC: 4 condities op Wilson \& Caliskan cv-dataset \\
         4. Synthese         & 11--12 & Eindrapport \\
         \bottomrule
         \end{tabular}
@@ -265,18 +269,19 @@
 \end{frame}
 
 \begin{frame}
+   	\frametitle{Technisch luik: fase 3.}
     \begin{itemize}
-        \item \textbf{Wat}: een eenvoudig bias-auditscript implementeren
-            en toepassen op een publiek beschikbare cv- of
-            aanwervingsdataset.
-        \item \textbf{Meting}: het verschil in scoring of
-            shortlisting-kans tussen kandidaten met vergelijkbare
-            kwalificaties maar verschillende gesuggereerde
-            demografische kenmerken.
-        \item \textbf{Aanpak}: naar analogie met de meetmethode van
-            Wen et al.\ (2025).
-        \item \textbf{Waarom dit telt}: vult het cesuurcriterium
-            ``technische component'' in, naast het theoretische werk.
+        \item \textbf{Wat}: de drie maatregelen getest als condities
+            tegenover een baseline, op cv-vacature-paren uit de publieke
+            dataset van Wilson \& Caliskan (2024).
+        \item \textbf{Methode}: telkens enkel de naam op een cv
+            vervangen door een naam geassocieerd met een specifiek
+            ras/geslacht; de rest van het cv blijft ongewijzigd.
+        \item \textbf{Condities}: bias-audit met terugkoppeling,
+            transparante scoringscriteria, menselijk toezicht -- elk
+            rechtstreeks gekoppeld aan de drie voorgestelde maatregelen.
+        \item \textbf{Meting}: verschil in rangschikking tussen
+            naamvarianten (ras, gender) en doorlooptijd per conditie.
     \end{itemize}
 \end{frame}
 
@@ -290,8 +295,11 @@
             gebruiker van Workday of Eightfold AI bias kan beperken
             zonder de efficiëntie van geautomatiseerde screening te
             verliezen.
-        \item Gemeten PoC-resultaten die aantonen hoe detecteerbaar bias
-            is met een eenvoudig, haalbaar auditscript.
+        \item Gemeten PoC-resultaten over raciale en gender-bias in
+            cv-rangschikking, en de doorlooptijd, onder vier condities.
+        \item Een toetsing van de bevindingen van Wilson \& Caliskan
+            (2024), Wen et al.\ (2025) en Xu et al.\ (2025) aan een
+            eigen, gecontroleerde testopstelling.
         \item Geen interne bedrijfsdata nodig: publieke datasets en
             gepubliceerde rechtszaakdocumenten volstaan.
     \end{itemize}
@@ -307,26 +315,23 @@
     \frametitle{Bronnen.}
 
     \small
-    \begin{itemize}
-        \item \textbf{Fabris et al.\ (2025)}, ACM TIST -- peer-reviewed
+     \begin{itemize}
+        \item \textbf{Fabris et al.\ (2025)}, ACM TIST - peer-reviewed
             tijdschriftartikel, multidisciplinair overzicht.
         \item \textbf{Chen (2023)}, Humanities and Social Sciences
-            Communications -- peer-reviewed tijdschriftartikel
+            Communications - peer-reviewed tijdschriftartikel
             (Springer/Nature).
-        \item \textbf{Wen et al.\ (2025)}, \textbf{Xu et al.\ (2025)} --
+        \item \textbf{Wen et al.\ (2025)}, \textbf{Xu et al.\ (2025)} -
             arXiv-preprints, meting van bias bij cv-screening.
+        \item \textbf{Wilson \& Caliskan (2024)} - publieke dataset en
+            open-source naamvervangingsmethode, basis van de PoC.
         \item \textbf{Jones Walker LLP (2026)}, \textbf{University of
-            Miami Law Review (2026)} -- onafhankelijke juridische
-            analyses van beide rechtszaken.
-        \item \textbf{EU AI Act (2024)}, \textbf{EEOC (2024)} --
-            regelgevend kader, EU en VS.
+            Miami Law Review (2026)}, \textbf{EU AI Act (2024)},
+            \textbf{EEOC (2024)} - juridische analyses en regelgevend
+            kader (EU en VS).
     \end{itemize}
 
-    \medskip
-    \begin{minipage}{.7\textwidth}
-    Bewust een mix van brontypes: peer-reviewed publicaties,
-    arXiv-preprints \'en onafhankelijke juridische analyses.
-    \end{minipage}
+
 \end{frame}
 
 \begin{frame}
