@@ -1,18 +1,10 @@
-%==============================================================================
-% Research Methods - Group assignment - proposals
-%==============================================================================
-
-% This loads the article template. For a text written in English, add the
-% "english" option, i.e. \documentclass[english]{hogent-article}
 \documentclass{hogent-article}
 
 % Include bibliography file
 \addbibresource{references.bib}
 
-% Info about the assignment, course and study programme
-
 \studyprogramme{Professionele bachelor toegepaste informatica}
-\course{Research Methods, 2E1}
+\course{Research Methods, 2D, 2E1}
 \assignmenttype{Groepsopdracht}
 \academicyear{2025-2026}
 \title{AI-bias bij geautomatiseerde aanwerving: het geval van Workday en Eightfold AI}
@@ -46,11 +38,35 @@
   wettelijk verplichte kennisgevingen. Beide zaken illustreren een breder
   probleem dat in peer-reviewed onderzoek is aangetoond: algoritmische
   aanwervingssystemen kunnen bestaande vooroordelen op basis van leeftijd,
-  ras en geslacht reproduceren of versterken. Dit onderzoeksvoorstel
-  onderzoekt welke combinatie van technische en organisatorische maatregelen
-  het meest geschikt is om discriminatie van sollicitanten door
-  AI-gedreven aanwervingsplatformen te beperken, zonder de efficiëntiewinst
-  van geautomatiseerde screening significant te verminderen.
+  ras en geslacht reproduceren of versterken, onder meer doordat ze getraind
+  worden op beperkte of onevenwichtige data en vooroordelen van ontwerpers
+  overnemen. Dit onderzoeksvoorstel onderzoekt welke combinatie van
+  technische en organisatorische maatregelen (bias-audits, transparante
+  scoringscriteria en menselijk toezicht op automatische afwijzingen) het
+  meest geschikt is om discriminatie van sollicitanten door AI-gedreven
+  aanwervingsplatformen te beperken, zonder de efficiëntiewinst van
+  geautomatiseerde screening significant te verminderen. Op basis van een
+  literatuurstudie wordt eerst het probleem- en oplossingsdomein afgebakend.
+  Vervolgens worden de drie maatregelen in een eigen proof-of-concept
+  vergelijkend getest, gebruikmakend van de dataset en naamvervangingsmethode
+  van Wilson en Caliskan (2024): voor een vaste steekproef van
+  cv-vacature-paren wordt telkens enkel de kandidaatsnaam vervangen door een
+  naam die statistisch geassocieerd wordt met een specifieke combinatie van
+  ras en geslacht, waarna een tekst-embeddingmodel de cv's rangschikt onder
+  vier condities (baseline, bias-audit met terugkoppeling, transparante
+  scoringscriteria en menselijk toezicht). Per conditie wordt gemeten in
+  welke mate naamvarianten geassocieerd met een blanke of mannelijke
+  kandidaat bevoordeeld worden, hoeveel de rangschikkingspositie verschuift,
+  en wat de doorlooptijd van elke maatregel is. Verwacht wordt dat de
+  baseline een meetbare bias ten voordele van blanke en mannelijke
+  naamvarianten vertoont, en dat elke maatregel deze bias in verschillende
+  mate terugdringt, mogelijk ten koste van een langere doorlooptijd, zodat
+  geen enkele maatregel bias volledig wegneemt zonder afweging met
+  efficiëntie. Het onderzoek moet zo resulteren in
+  een onderbouwd afwegingskader voor werkgevers die een
+  AI-aanwervingsplatform zoals dat van Workday of Eightfold AI inzetten, om
+  discriminatierisico's te beperken zonder de efficiëntiewinst van
+  geautomatiseerde screening volledig op te geven.
 \end{abstract}
 
 \tableofcontents
@@ -62,7 +78,7 @@ In mei 2025 liet een federale rechtbank in Californië een collectieve
 rechtszaak toe tegen softwarebedrijf Workday. Eiser Derek Mobley
 solliciteerde over een periode van zeven jaar meer dan honderd keer via het
 aanwervingsplatform van Workday en werd telkens binnen enkele minuten
-afgewezen. De rechtbank oordeelde dat het platform kan optreden als "agent"
+afgewezen. De rechtbank oordeelde dat het platform kan optreden als ``agent''
 van de werkgevers die het gebruiken, waardoor Workday zelf aansprakelijk kan
 worden gesteld onder de federale leeftijdsdiscriminatiewet (ADEA). De
 vordering kan mogelijk miljoenen sollicitanten ouder dan veertig jaar
@@ -111,7 +127,7 @@ middelgrote tot grote organisaties die een AI-aanwervingsplatform zoals dat
 van Workday of Eightfold AI inzetten of overwegen in te zetten, en die
 verantwoordelijk zijn voor het beperken van de juridische en
 reputatierisico's rond geautomatiseerde aanwerving. Dit is dus niet
-"HR-professionals" in het algemeen, maar specifiek de teams die de
+``HR-professionals'' in het algemeen, maar specifiek de teams die de
 leverancierskeuze en het beleid rond geautomatiseerde screening bepalen.
 
 Op basis van dit concrete, benoemde probleem, verankerd in de rechtszaken
